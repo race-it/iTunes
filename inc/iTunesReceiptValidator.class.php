@@ -3,11 +3,13 @@
 class iTunesReceiptValidator {
   private $_iTunesProductionVerifyURL = 'https://buy.itunes.apple.com/verifyReceipt';
   private $_iTunesSandboxVerifyURL = 'https://sandbox.itunes.apple.com/verifyReceipt';
-  private $_iTunesRetrySandbox = TRUE;
+  private $_retrySandbox = TRUE;
+  private $_retryProduction = TRUE;
   private $_endpoint;
   private $_verbose = FALSE;
 
   const SANDBOX_RECEIPT_SENT_TO_PRODUCTION_ERROR = 21007;
+  const PRODUCTION_RECIEPT_SENT_TO_SANDBOX_ERROR = 21008;
 
   function __construct($endpoint, $verbose = FALSE) {
     $this->setEndPoint($endpoint);
@@ -44,6 +46,22 @@ class iTunesReceiptValidator {
 
   public function getVerbose() {
     return $this->_verbose;
+  }
+
+  public function setRetrySandbox($value) {
+    $this->_retrySandbox = $value;
+  }
+
+  public function getRetrySandbox() {
+    return $this->$_retrySandbox;
+  }
+
+  public function setRetryProduction($value) {
+    $this->_retryProduction = $value;
+  }
+
+  public function getRetryProduction() {
+    return $this->_retryProduction;
   }
 
   public function validateReceipt($receipt) {
@@ -86,10 +104,15 @@ class iTunesReceiptValidator {
       );
     } 
 
-    if ($data->status === self::SANDBOX_RECEIPT_SENT_TO_PRODUCTION_ERROR && $this->_iTunesRetrySandbox) {
+    if ($data->status === self::SANDBOX_RECEIPT_SENT_TO_PRODUCTION_ERROR && $this->getRetrySandbox()) {
       $this->setEndpoint($this->getSandboxVerifyURL());
       return $this->validateReceipt($receipt);
     }
+    
+    if ($data->status === self::PRODUCTION_RECIEPT_SENT_TO_SANDBOX_ERROR && $this->getRetryProduction()) {
+      $this->setEndpoint($this->getProductionVerifyURL());
+      return $this->validateReceipt($receipt);
+    }    
 
     return $data;
 
