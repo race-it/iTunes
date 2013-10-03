@@ -10,6 +10,7 @@ class iTunesReceiptValidator {
 
   const SANDBOX_RECEIPT_SENT_TO_PRODUCTION_ERROR = 21007;
   const PRODUCTION_RECIEPT_SENT_TO_SANDBOX_ERROR = 21008;
+  const CURL_ERROR = 60001;
 
   function __construct($endpoint, $verbose = FALSE) {
     $this->setEndPoint($endpoint);
@@ -100,7 +101,7 @@ class iTunesReceiptValidator {
     // Ensure response data was a valid JSON string.
     if (!is_object($data)) {
       return (object) array(
-        'status' => 60001
+        'status' => CURL_ERROR,
       );
     } 
 
