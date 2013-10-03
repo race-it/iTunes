@@ -4,7 +4,7 @@ class iTunesReceiptValidator {
   private $_iTunesProductionVerifyURL = 'https://buy.itunes.apple.com/verifyReceipt';
   private $_iTunesSandboxVerifyURL = 'https://sandbox.itunes.apple.com/verifyReceipt';
   private $_retrySandbox = TRUE;
-  private $_retryProduction = TRUE;
+  private $_retryProduction = FALSE;
   private $_endpoint;
   private $_verbose = FALSE;
 
