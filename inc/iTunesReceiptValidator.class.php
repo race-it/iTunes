@@ -12,8 +12,9 @@ class iTunesReceiptValidator {
   const PRODUCTION_RECIEPT_SENT_TO_SANDBOX_ERROR = 21008;
   const CURL_ERROR = 60001;
 
-  function __construct($endpoint, $verbose = FALSE) {
+  function __construct($endpoint, $password, $verbose = FALSE) {
     $this->setEndPoint($endpoint);
+    $this->setPassword($password);
     $this->setVerbose($verbose);
   }
 
