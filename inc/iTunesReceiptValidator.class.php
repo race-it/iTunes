@@ -6,6 +6,7 @@ class iTunesReceiptValidator {
   private $_retrySandbox = TRUE;
   private $_retryProduction = FALSE;
   private $_endpoint;
+  private $_password;
   private $_verbose = FALSE;
 
   const SANDBOX_RECEIPT_SENT_TO_PRODUCTION_ERROR = 21007;
@@ -63,7 +64,7 @@ class iTunesReceiptValidator {
   }
 
   public function getPassword() {
-    return $this->$_password;
+    return $this->_password;
   }
   
   public function setRetryProduction($value) {
@@ -82,7 +83,7 @@ class iTunesReceiptValidator {
 
     $receiptData = (object) array(
       'receipt-data' => $receipt,
-      'password' => getPassword(),
+      'password' => $this->getPassword(),
     );
 
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($receiptData));
