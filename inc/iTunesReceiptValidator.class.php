@@ -73,7 +73,7 @@ class iTunesReceiptValidator {
     return $this->_retryProduction;
   }
 
-  public function validateReceipt($receipt, $shared_secret) {
+  public function validateReceipt($receipt) {
     $ch = curl_init($this->getEndpoint());
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
