@@ -6,11 +6,12 @@ function __autoload($class_name)
 
 
 $rcpt = '<insert receipt here>';
+$ss = '<insert shared secret here>';
 
 $temp = new iTunesReceiptValidator('https://buy.itunes.apple.com/verifyReceipt');
-print_r($temp->validateReceipt($rcpt));
+print_r($temp->validateReceipt($rcpt, $ss));
 $temp->setEndpoint($temp->getSandboxVerifyURL());
 
-print_r($temp->validateReceipt($rcpt));
+print_r($temp->validateReceipt($rcpt, $ss));
 
 ?>
