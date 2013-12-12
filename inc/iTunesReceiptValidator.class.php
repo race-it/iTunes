@@ -57,6 +57,14 @@ class iTunesReceiptValidator {
     return $this->$_retrySandbox;
   }
 
+  public function setPassword($value) {
+    $this->_password = $value;
+  }
+
+  public function getPassword() {
+    return $this->$_password;
+  }
+  
   public function setRetryProduction($value) {
     $this->_retryProduction = $value;
   }
@@ -65,7 +73,7 @@ class iTunesReceiptValidator {
     return $this->_retryProduction;
   }
 
-  public function validateReceipt($receipt) {
+  public function validateReceipt($receipt, $shared_secret) {
     $ch = curl_init($this->getEndpoint());
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -73,6 +81,7 @@ class iTunesReceiptValidator {
 
     $receiptData = (object) array(
       'receipt-data' => $receipt,
+      'password' => getPassword(),
     );
 
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($receiptData));
