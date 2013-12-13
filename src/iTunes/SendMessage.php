@@ -1,6 +1,6 @@
 <?php
 
-class iTunesPushMessage {
+class SendMessage {
 
   private $_iTunesProductionGateway = 'ssl://gateway.push.apple.com:2195';
   private $_iTunesProductionFeedback = 'ssl://feedback.push.apple.com:2196';
@@ -172,5 +172,3 @@ functionpush_messages() {
     }
   }
 }
-
-?>
