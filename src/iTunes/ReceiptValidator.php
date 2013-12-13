@@ -1,8 +1,8 @@
 <?php
 
-namespace itunes;
+namespace iTunes;
 
-class receiptValidator {
+class ReceiptValidator {
   private $_iTunesProductionVerifyURL = 'https://buy.itunes.apple.com/verifyReceipt';
   private $_iTunesSandboxVerifyURL = 'https://sandbox.itunes.apple.com/verifyReceipt';
   private $_retrySandbox = TRUE;
