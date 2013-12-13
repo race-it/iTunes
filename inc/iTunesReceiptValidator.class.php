@@ -9,8 +9,15 @@ class iTunesReceiptValidator {
   private $_password;
   private $_verbose = FALSE;
 
-  const SANDBOX_RECEIPT_SENT_TO_PRODUCTION_ERROR = 21007;
-  const PRODUCTION_RECIEPT_SENT_TO_SANDBOX_ERROR = 21008;
+  const COULD_NOT_READ_JSON_OBJECT = 21000; // The App Store could not read the JSON object you provided.
+  const RECEIPT_DATA_PROPERTY_MALFORMED = 21002; // The data in the receipt-data property was malformed.
+  const RECEIPT_COULD_NOT_BE_AUTHENTICATED = 21003; // The receipt could not be authenticated.
+  const SHARED_SECRET_MISMATCH = 21004; // The shared secret you provided does not match the shared secret on file for your account.
+  const RECEIPT_SERVER_UNAVAILABLE = 21005; // The receipt server is not currently available.
+  const VALID_RECEIPT_BUT_SUBSCRIPTION_EXPIRED = 21006; // This receipt is valid but the subscription has expired. When this status code is returned to your server, the receipt data is also decoded and returned as part of the response.
+  const SANDBOX_RECEIPT_SENT_TO_PRODUCTION_ERROR = 21007; // This receipt is a sandbox receipt, but it was sent to the production service for verification.
+  const PRODUCTION_RECIEPT_SENT_TO_SANDBOX_ERROR = 21008; // This receipt is a production receipt, but it was sent to the sandbox service for verification.
+  const RECEIPT_VALID = 0; // This receipt valid.
   const CURL_ERROR = 60001;
 
   function __construct($endpoint, $password, $verbose = FALSE) {
