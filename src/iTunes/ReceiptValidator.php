@@ -1,6 +1,8 @@
 <?php
 
-class iTunesReceiptValidator {
+namespace iTunes;
+
+class ReceiptValidator {
   private $_iTunesProductionVerifyURL = 'https://buy.itunes.apple.com/verifyReceipt';
   private $_iTunesSandboxVerifyURL = 'https://sandbox.itunes.apple.com/verifyReceipt';
   private $_retrySandbox = TRUE;
@@ -20,7 +22,7 @@ class iTunesReceiptValidator {
   const RECEIPT_VALID = 0; // This receipt valid.
   const CURL_ERROR = 60001;
 
-  function __construct($endpoint, $password, $verbose = FALSE) {
+  function __construct($endpoint, $password = NULL, $verbose = FALSE) {
     $this->setEndPoint($endpoint);
     $this->setPassword($password);
     $this->setVerbose($verbose);
@@ -90,8 +92,11 @@ class iTunesReceiptValidator {
 
     $receiptData = (object) array(
       'receipt-data' => $receipt,
-      'password' => $this->getPassword(),
     );
+
+    if ($this->getPassword() == '') {
+      $receiptData->password = $this->getPassword();
+    }
 
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($receiptData));
 
@@ -137,4 +142,3 @@ class iTunesReceiptValidator {
 
   }
 }
-?>
