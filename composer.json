@@ -4,6 +4,7 @@
     "keywords": ["Apple", "iTunes", "Receipt Validation", "iOS"],
     "homepage": "https://github.com/race-it/iTunes",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "John Jones",
