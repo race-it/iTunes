@@ -18,7 +18,7 @@ class ReceiptValidator {
   const RECEIPT_SERVER_UNAVAILABLE = 21005; // The receipt server is not currently available.
   const VALID_RECEIPT_BUT_SUBSCRIPTION_EXPIRED = 21006; // This receipt is valid but the subscription has expired. When this status code is returned to your server, the receipt data is also decoded and returned as part of the response.
   const SANDBOX_RECEIPT_SENT_TO_PRODUCTION_ERROR = 21007; // This receipt is a sandbox receipt, but it was sent to the production service for verification.
-  const PRODUCTION_RECIEPT_SENT_TO_SANDBOX_ERROR = 21008; // This receipt is a production receipt, but it was sent to the sandbox service for verification.
+  const PRODUCTION_RECEIPT_SENT_TO_SANDBOX_ERROR = 21008; // This receipt is a production receipt, but it was sent to the sandbox service for verification.
   const RECEIPT_VALID = 0; // This receipt valid.
   const CURL_ERROR = 60001;
 
@@ -133,7 +133,7 @@ class ReceiptValidator {
       return $this->validateReceipt($receipt);
     }
     
-    if ($data->status === self::PRODUCTION_RECIEPT_SENT_TO_SANDBOX_ERROR && $this->getRetryProduction()) {
+    if ($data->status === self::PRODUCTION_RECEIPT_SENT_TO_SANDBOX_ERROR && $this->getRetryProduction()) {
       $this->setEndpoint($this->getProductionVerifyURL());
       return $this->validateReceipt($receipt);
     }    
