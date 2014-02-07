@@ -94,7 +94,7 @@ class ReceiptValidator {
       'receipt-data' => $receipt,
     );
 
-    if ($this->getPassword() == '') {
+    if ($this->getPassword() != '') {
       $receiptData->password = $this->getPassword();
     }
 
