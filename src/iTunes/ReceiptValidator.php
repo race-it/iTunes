@@ -65,7 +65,7 @@ class ReceiptValidator {
   }
 
   public function getRetrySandbox() {
-    return $this->$_retrySandbox;
+    return $this->_retrySandbox;
   }
 
   public function setPassword($value) {
